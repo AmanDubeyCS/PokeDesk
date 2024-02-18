@@ -9,49 +9,56 @@ function Main() {
     const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/")
     const [next, setNext] = useState()
     const [prev, setPrev] = useState()
- 
-    useEffect(() => {
-        const fetch = async() =>{
-            setLoading(true)
-            const res = await fetch(url)
-            setNext(res.data.next)
-            setPrev(res.data.previous)
-            getPokemon(res.data.result)
-            setLoading(false)
-            console.log(pokeData)
-        }
-    }, [])
+    const [pokeDex, setPokeDex] = useState()
 
-    const getPokemon = async() => {
+    const fetchData = async () => {
+        setLoading(true)
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("data not found");
+        }
+        const res = await response.json();
+        setNext(res.next)
+        setPrev(res.previous)
+        getPokemon(res.results)
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    const getPokemon = async(res) => {
         res.map(async(item) => {
             const result = await fetch(item.url)
-            setPokeData(state => {
-                state = [...state,result.data]
-                return state
+            const data = await result.json()
+            setPokeData((state) => {
+                state = [...state,data]
+                state.sort((a,b) => a.id>b.id? 1:-1)
+                return state;
             })
         })
     }
+
+    useEffect(() => {
+        fetchData();
+    }, [url]);
+
 
   return (
     <>
       <div className="container">
         <div className="left-content">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card pokemon={pokeData} loading={loading} pokeInfo={poke=>setPokeDex(poke)}/>
             <div className="button">
-                <button>Previous</button>
-                <button>Next</button>
+               {prev && <button onClick={() => {setPokeData([]); setUrl(prev); }}>Previous</button>} 
+                <button onClick={() => {setPokeData([]); setUrl(next); }}>Next</button>
             </div>
         </div>
         <div className="right-content">
-            <PokemonInfo />
+            <div className="poke-Info-Card">
+                <PokemonInfo data={pokeDex}/>
+            </div> 
         </div>
       </div>
     </>

@@ -2,17 +2,26 @@ import React from 'react'
 import charmender from './pngwing.com.png'
 import './Style.css'
 
-function Card() {
+function Card({pokemon, loading, pokeInfo}) {
   return (
-    <div className='card-container'>
-        <div className="pokemon-image">
-            <img src={charmender} alt="" />
-        </div>
-        <div className="pokemon-info">
-            <h2>1</h2>
-            <h1>Charmander</h1>
-        </div>
-    </div>
+    <>
+    { 
+      loading ? <h1>Loading...</h1> :
+      (pokemon.map((item) =>{
+        return(
+          <div className='card-container' key={item.id} onClick={()=>pokeInfo(item)}>
+          <div className="pokemon-image">
+              <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${item.id}.svg`} alt="" />
+          </div>
+          <div className="pokemon-info">
+              <h1>{item.name}</h1>
+          </div>
+          </div>
+        )
+      }))
+    }
+      
+    </>
   )
 }
 
