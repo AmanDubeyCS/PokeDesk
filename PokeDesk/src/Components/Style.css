@@ -1,0 +1,100 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body{
+    background-color: rgb(241, 241, 177);
+
+}
+
+.container{
+    background-color: pink;
+    width: 90%;
+    padding-top: 100px;
+    margin: auto;
+    display: flex;
+}
+
+.left-content , .right-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    background-color: blanchedalmond;
+}
+
+.button{
+    display: flex;
+
+}
+.button button{
+    outline: none;
+    border: none;
+    width: 150px;
+    padding: 0.3rem 0;
+    margin: 1rem;
+    font-size: 17px;
+    background-color: green;
+}
+/* Card CSS */
+
+.card-container{
+    background-color: aqua;
+    display: block;
+    width: 150px;
+    height: 200px;
+    align-items: center;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+.pokemon-image{
+    width: 90%;
+    margin: auto;
+    height: 50%;
+}
+
+.pokemon-image img{
+    width: 100px;
+}
+
+.pokemon-info{
+    width: 90%;
+    height: 50%;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    padding-top: 30px;
+
+}
+
+.pokemon-info h2{
+    font-size: 16px;
+
+}
+
+.pokemon-info h1{
+    font-size: 18px;
+}
+
+/* */
+
+.Poke-info-container{
+    width: 80%;
+    height: 500px;
+    display: block;
+}
+
+.Poke-Image img{
+    width: 250px;
+    height: 250px;
+}
+
+.abilities{
+    padding: 20px;
+}
