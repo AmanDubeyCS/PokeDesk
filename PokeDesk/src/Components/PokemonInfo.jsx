@@ -1,5 +1,4 @@
 import React from "react";
-import charmender from "./pngwing.com.png";
 
 function PokemonInfo({ data }) {
   console.log(data);

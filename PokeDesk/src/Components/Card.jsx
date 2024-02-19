@@ -1,5 +1,4 @@
 import React from 'react'
-import charmender from './pngwing.com.png'
 import './Style.css'
 
 function Card({pokemon, loading, pokeInfo}) {
